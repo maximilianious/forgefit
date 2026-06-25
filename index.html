@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ForgeFit – Your Personal Workout Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f0f0f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<body>
+
+  <!-- SCREEN 1: Welcome -->
+  <div class="screen active" id="screen-welcome">
+    <div class="welcome-bg">
+      <div class="welcome-content">
+        <div class="logo-mark">⚡</div>
+        <h1 class="logo">ForgeFit</h1>
+        <p class="tagline">Tell us about yourself.<br>We'll build your plan.</p>
+        <button class="btn-primary" onclick="goTo('screen-form')">Build My Plan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Form -->
+  <div class="screen" id="screen-form">
+    <div class="form-header">
+      <button class="back-btn" onclick="goTo('screen-welcome')">← Back</button>
+      <h2>Your Profile</h2>
+    </div>
+
+    <div class="form-body">
+
+      <div class="form-group">
+        <label>What sport or activity do you train for?</label>
+        <input type="text" id="sport" placeholder="e.g. Basketball, Swimming, General fitness…" />
+      </div>
+
+      <div class="form-group">
+        <label>Your fitness level</label>
+        <div class="chip-group" id="level-chips">
+          <div class="chip" data-group="level" data-value="Beginner">Beginner</div>
+          <div class="chip" data-group="level" data-value="Intermediate">Intermediate</div>
+          <div class="chip" data-group="level" data-value="Advanced">Advanced</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Days per week</label>
+        <div class="chip-group" id="days-chips">
+          <div class="chip" data-group="days" data-value="2">2</div>
+          <div class="chip" data-group="days" data-value="3">3</div>
+          <div class="chip" data-group="days" data-value="4">4</div>
+          <div class="chip" data-group="days" data-value="5">5</div>
+          <div class="chip" data-group="days" data-value="6">6</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Session length</label>
+        <div class="chip-group" id="duration-chips">
+          <div class="chip" data-group="duration" data-value="30 minutes">30 min</div>
+          <div class="chip" data-group="duration" data-value="45 minutes">45 min</div>
+          <div class="chip" data-group="duration" data-value="60 minutes">60 min</div>
+          <div class="chip" data-group="duration" data-value="90 minutes">90 min</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Available equipment <span class="label-note">(pick all that apply)</span></label>
+        <div class="chip-group multi" id="equipment-chips">
+          <div class="chip" data-group="equipment" data-value="No equipment (bodyweight only)">Bodyweight</div>
+          <div class="chip" data-group="equipment" data-value="Dumbbells">Dumbbells</div>
+          <div class="chip" data-group="equipment" data-value="Barbell & plates">Barbell</div>
+          <div class="chip" data-group="equipment" data-value="Gym machines">Machines</div>
+          <div class="chip" data-group="equipment" data-value="Resistance bands">Bands</div>
+          <div class="chip" data-group="equipment" data-value="Kettlebells">Kettlebells</div>
+          <div class="chip" data-group="equipment" data-value="Pull-up bar">Pull-up bar</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Primary goal</label>
+        <div class="chip-group" id="goal-chips">
+          <div class="chip" data-group="goal" data-value="Build muscle">Build muscle</div>
+          <div class="chip" data-group="goal" data-value="Lose weight">Lose weight</div>
+          <div class="chip" data-group="goal" data-value="Improve endurance">Endurance</div>
+          <div class="chip" data-group="goal" data-value="Sport performance">Sport performance</div>
+          <div class="chip" data-group="goal" data-value="General fitness">General fitness</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Injuries or limitations? <span class="label-note">(optional)</span></label>
+        <input type="text" id="injuries" placeholder="e.g. Bad knees, shoulder injury…" />
+      </div>
+
+      <div id="form-error" class="form-error hidden">Please fill in your sport and select at least your fitness level, days per week, and a goal.</div>
+
+      <button class="btn-primary" onclick="submitForm()">Generate My Plan ⚡</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Loading -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p class="loading-text">Building your plan…</p>
+      <p class="loading-sub">Tailoring every session to your goals</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: Results -->
+  <div class="screen" id="screen-results">
+    <div class="results-header">
+      <button class="back-btn" onclick="goTo('screen-form')">← Edit</button>
+      <h2>Your Plan</h2>
+      <button class="rebuild-btn" onclick="submitForm()">↺</button>
+    </div>
+    <div class="results-body" id="results-body">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
